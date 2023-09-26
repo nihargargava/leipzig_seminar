@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<!-- This script is totally based on "Jugaad" -->
+<!-- I don't know how to trigger slide-transitions with the auto-animate feature -->
+<!-- So I will load this entire d3 scipt as a background on the slide and let it run the show -->
+
+<!-- It took me a lot of time trying to make mathJax work with d3js. -->
+<!-- I took help from this blog: -->
+<!-- https://www.thesoftwaresimpleton.com/blog/2016/05/25/sine-wave -->
+<!-- After a lot of profanity, I finally managed to make it. It had been emotional. -->
+
+
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+
+<body style='overflow: hidden;'>
+
+	<script src="//d3js.org/d3.v3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.2.0/math.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_SVG">
+	</script>
+
+
+	<script>
+
+		//For making things of a preset ratio
+		const windowRatio = 1.0;
+		const TextRatio = 0.2;
+
+
+//For dynamically adjusting ratio
+// const screenRatio = window.innerHeight/window.innerWidth;
+var margin = 
+	//{top: 50, right: 20, bottom: 50, left: 20},
+	{top: 0, right: 0, bottom: 0, left: 0};
+// width = 960 - margin.left - margin.right,
+// height = 500 - margin.top - margin.bottom;
+//width = Math.min(600, window.innerWidth - margin.left - margin.right - 10),
+//height = Math.min(600 - margin.top - margin.bottom, window.innerHeight - margin.top - margin.bottom);
+
+
+width = window.innerWidth;
+height = window.innerWidth*windowRatio;
+
+
+//Set transit speed
+var transitDuration  = 1000;
+
+//This is the scale that my human brain can understand
+var scaleForCode = 5;
+
+//x and y functions take domain as shown and currectly spit out the right coordinates
+var x = d3.scale.linear()
+	.domain([-scaleForCode, scaleForCode])
+	.range([0, width]);
+
+//x and y functions take domain as shown and currectly spit out the right coordinates
+var y = d3.scale.linear()
+	.domain([-scaleForCode*windowRatio, scaleForCode*windowRatio]) //adjusted by windowRatio
+	.range([height*0.9, -0.1*height]);
+	//.range([height*(windowRatio - TextRatio), -(TextRatio)*height]);
+
+unit = x(1)-x(0);
+
+
+
+
+
+//sets up the svg element to be located correctly
+var oursvg = d3.select("body").append("svg")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom);
+//  .append("g")
+//    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+//intention: Take a 2d coordinate and put point there
+const cRadius='2px';
+const cRadius1='2px';
+const cRadius2=x(0.5)-x(0);
+const color1='black'
+const color2='blue'
+const color3='red'
+const color4='orange'
+
+function putPointHere(d){
+	oursvg.append('circle')
+		.attr('class','Lpoint')
+		.attr('r',cRadius)
+		.attr('cx',x(d[0]))
+		.attr('cy',y(d[1]))
+		.attr('Lcoord',d) //Lattice base coordinate
+		.attr('fill',color1);
+}
+
+
+
+//Text should be drawn over everything else
+// This is total "Judaad". In order to manipulate this text, I have put it in a container called text1
+
+//first let us make a box to contain all our text
+//This Jugaad box will become invisible in the slides! Try changing the white to red below to see the reality
+
+const textboxH = height*0.2;
+const textboxX = -5;
+const textboxY = height-textboxH;
+const textboxW = width+5;
+
+oursvg.append("rect")
+	.attr("class", "textbox")
+	.attr("x", textboxX)
+	.attr("y", textboxY)
+	.attr("width",textboxW)
+	.attr("height",textboxH+10)
+	.attr("fill",'white');
+
+//integral of f(x)
+oursvg.append("g")
+	.attr("class", "statex_fxint")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (textboxX+textboxW*0.6) + " ,"+ (textboxY+textboxH*0.14) + ")") 
+	.attr("font-size","1.0em")
+	.append("g")
+	.attr("class", "tick")
+	.append("text")  	
+	.text("$ \\int_{\\mathbb{R}^2} f(x)dx=$");
+
+//value of lattice sum
+oursvg.append("g")
+	.attr("class", "statex_latticesumvalue")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (textboxX+textboxW*0.1) + " ,"+ (textboxY+textboxH*0.14) + ")") 
+	.attr("font-size","1.0em")
+	.append("g")
+	.attr("class", "tick")
+	.append("text")  	
+	.text("$\\Phi_f(\\Lambda)\ \  = $");
+
+//average value of lattice sum
+oursvg.append("g")
+	.attr("class", "statex_avg")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (textboxX+textboxW*0.036) + " ,"+ (textboxY+textboxH*0.46) + ")") 
+	.attr("font-size","1.0em")
+	.append("g")
+	.attr("class", "tick")
+	.append("text")  	
+	.text("$\\frac{\\sum_{\\Lambda \\in S} \\Phi_f(\\Lambda)}{{\\#S}}= $");
+
+//just an equal to sign
+oursvg.append("g")
+	.attr("class", "statex_equalsign")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (textboxX+textboxW*0.38) + " ,"+ (textboxY+textboxH*0.64) + ")") 
+	.attr("font-size","1.0em")
+	.append("g")
+	.attr("class", "tick")
+	.append("text")  	
+	.text("$= $");
+
+//Fake Line looking like fraction
+//.attr('transform', " translate(" + (textboxX+textboxW*0.1) + " ,"+ (textboxY+10) + ")") 
+var lineY = textboxY + textboxH*0.67;
+var lineX = textboxX+textboxW*0.27;
+var lineW = textboxW*0.10;;
+
+oursvg.append('line')
+	.attr('class','fractionline')
+	.attr('x1', lineX)
+	.attr('y1', lineY)
+	.attr('x2', lineX + lineW)
+	.attr('y2', lineY)
+	.attr('stroke','black')
+	.attr('opacity',0.0)
+	.attr('stroke-width','0.08em');
+
+//value of lattice sum in text
+oursvg.append("text")
+	.attr('text-anchor', 'middle')
+	.attr("class", "LSvalue")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (lineX + lineW*0.50 )+" ,"+ (textboxY + textboxH*0.32 )+ ")") 
+	.attr("font-size","1.0em")
+	.text('0');
+
+//value of sum of lattice sum in text
+oursvg.append("text")
+	.attr('text-anchor', 'middle')
+	.attr("class", "totalofvalue")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (lineX + lineW*0.50)+" ,"+ (textboxY + textboxH*0.62 )+ ")") 
+	.attr("font-size","1.0em")
+	.text('0.0');
+
+oursvg.append("text")
+	.attr('text-anchor', 'middle')
+	.attr("class", "samplesize")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (lineX + lineW*0.50)+" ,"+ (textboxY + textboxH*0.82 )+ ")") 
+	.attr("font-size","1.0em")
+	.text('0.0');
+
+
+oursvg.append("text")
+	.attr('text-anchor', 'left')
+	.attr("class", "SMTaverage")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (textboxX + textboxW*0.49)+" ,"+ (textboxY + textboxH*0.72 )+ ")") 
+	.attr("font-size","1.0em")
+	.text('0.00');
+
+
+oursvg.append("text")
+	.attr('text-anchor', 'middle')
+	.attr("class", "area")
+	.attr("opacity", 0.0)
+	.attr('transform', " translate(" + (textboxX + textboxW*0.90 )+" ,"+ (textboxY + textboxH*0.32 )+ ")") 
+	.attr("font-size","1.0em")
+	.text('0.0');
+
+
+
+
+
+
+
+//Interpolate translate of non-svg elements can be done through this function
+// See https://stackoverflow.com/questions/24030267/d3-transition-for-transform-translate-not-working-for-div#25247387
+// This function will take a class name of a text object (see the Jugaad above)
+// and it will perform a string interpolation to do the movement smoothly
+function moveText(Tname,xnew,ynew)
+{
+	var startTransform = d3.selectAll(Tname).attr('transform');
+	//console.log(startTransform);
+	var endTransform = " translate(" + xnew+ " ,"+ynew+")";
+	//console.log(endTransform);
+	var translateInterpolator = d3.interpolateString(startTransform, endTransform);
+	d3.selectAll(Tname)
+		.transition().duration(transitDuration)
+		.attrTween('transform' , function(d){ return translateInterpolator });
+}
+
+
+
+var c_1 = 3.0;
+var c_2 = 0.466;
+const R = 40.0;
+
+var t0 = Date.now();
+var c = Math.sin(t0*0.001);
+var c_0 = c_1*c + c_2*(1.0-c);
+
+// Ellipse 1
+oursvg.append('ellipse')
+	.attr('transform', " rotate(10,"  +x(0)+ "," +y(0)+ "  )") 
+	.attr('opacity',0.6)
+	.attr('rx',R*c_1)
+	.attr('ry',R/c_1)
+	.attr('cx',x(0))
+	.attr('cy',y(0))
+	.attr('fill',color2);
+
+
+
+// Ellipse 2
+oursvg.append('ellipse')
+	.attr('opacity',0.6)
+	.attr('rx',R*c_2)
+	.attr('ry',R/c_2)
+	.attr('cx',x(0))
+	.attr('cy',y(0))
+	.attr('fill',color3);
+
+
+// Ellipse 2
+oursvg.append('ellipse')
+	.attr('class','outer_ellipse')
+	.attr('opacity',0.4)
+	.attr('rx',R*c_0)
+	.attr('ry',R/c_0)
+	.attr('cx',x(0))
+	.attr('cy',y(0))
+	.attr('fill','grey')
+	.attr('stroke','black');
+
+
+d3.timer(function() {
+	
+	var t0 = Date.now();
+	var c = 0.5+ 0.5*Math.sin(t0*0.001);
+	var c_0 = c_1*c + c_2*(1.0-c);
+	d3.selectAll('ellipse.outer_ellipse').each(function(d,i){
+		
+		d3.select(this)
+			.attr('transform', " rotate(" +c*10+ ","  +x(0)+ "," +y(0)+ "  )") 
+			.attr('rx',R*c_0)
+			.attr('ry',R/c_0)
+	});
+
+});
+
+
+// These three ques were for adjusting when the transitions happen. 
+// Due to glitches, now we have no indexing and a simple queue of transitions
+var firstQue = 1
+var secondQue = 3
+var thirdQue = 6
+
+
+var _transitions = [];
+
+
+//mathjax is stupid and it won't automatically parse the SVG file
+//it has to be told seperately to make my equations readable throughout the text
+// the following is copied from https://gist.github.com/larsenmtl/86077bddc91c3de8d3db6a53216b2f47
+setTimeout(() => {
+
+	MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+			processEscapes: true
+		}
+	});
+
+	MathJax.Hub.Register.StartupHook("End", function() {
+		setTimeout(() => {
+			oursvg.selectAll('.tick').each(function(){
+				var self = d3.select(this),
+					g = self.select('text>span>svg');
+				g.remove();
+				self.append(function(){
+					return g.node();
+				});
+			});
+		}, 1);
+	});
+
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, oursvg.node()]);
+
+}, 1);
+
+
+
+
+
+	</script>
