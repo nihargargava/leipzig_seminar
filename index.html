@@ -26,6 +26,7 @@
 					<p> Presentation by
 					<h3 > Nihar P. Gargava </h3>
 					<br>
+					Post-doctoral researcher,
 					<br>
 					Chair of Number Theory,<br>
 					Section of Mathematics,
@@ -33,9 +34,9 @@
 					École Polytechnique Fédérale de Lausanne
 					</p>
 					<br>
-					28 September 2023
+					09 October 2023
 					<br>
-					MPI MiS Lepizig
+					University of Zurich
 					<br>
 
 				</section>
@@ -892,19 +893,22 @@
 								$\mathcal{G}(\mathbb{R})/ \Gamma$ 
 								for some algebraic $\mathbb{Q}$-group $\mathcal{G}$ and an arithmetic subgroup $\Gamma$. 
 								</p>
-								<p class="fragment fade-in-then-semi-out">
-								If the group $\mathcal{G}$ is semisimple, we are automatically guaranteed that 
-								$\mathcal{G}(\mathbb{R})/ \Gamma$ 
-								will be a probability space under the natural left $\mathcal{G}(\mathbb{R})$-invariant Haar measure
+								<!-- <p class="fragment fade-in-then-semi-out"> -->
+								<!-- If the group $\mathcal{G}$ is semisimple, we are automatically guaranteed that --> 
+								<!-- $\mathcal{G}(\mathbb{R})/ \Gamma$ --> 
+								<!-- will be a probability space under the natural left $\mathcal{G}(\mathbb{R})$-invariant Haar measure -->
 
-								</p>
+								<!-- </p> -->
 								<!-- <p class="fragment fade-in-then-semi-out"> -->
 								<!-- This is because of the following theorem. -->
 								<!-- </p> -->
 								<div class="fragment fade-in-then-semi-out" style="border:3px solid darkgrey;border-radius: 5px;padding: 25px 25px 25px 20px;border-style: outset;   ">
 									<h4 style="display: inline-block;" > Theorem  </h4> <i> (Borel, Harish-Chandra, 1962)</i> 
 									<br>
-									Let $\mathcal{G}\subseteq SL_n(\C)$ be an algebraic group defined over $\mathbb{Q}$. Then $\mathcal{G}_{\mathbb{R}}/\mathcal{G}_{\mathbb{Z}}$ has a finite invariant measure if any only if $X_{\mathbb{Q}}(\mathcal{G}^{0}) = \{ e\}$, where $\mathcal{G}^{0} \subseteq \mathcal{G}$ is the connected component of identity in the Zariski topology. That is to say, there are no non-trivial $\mathbb{Q}$-characters of $\mathcal{G}^{0}$.
+								If the group $\mathcal{G}$ is semisimple, we are automatically guaranteed that 
+								$\mathcal{G}(\mathbb{R})/ \Gamma$ 
+								will be a probability space under the natural left $\mathcal{G}(\mathbb{R})$-invariant Haar measure
+									<!-- Let $\mathcal{G}\subseteq SL_n(\C)$ be an algebraic group defined over $\mathbb{Q}$. Then $\mathcal{G}_{\mathbb{R}}/\mathcal{G}_{\mathbb{Z}}$ has a finite invariant measure if any only if $X_{\mathbb{Q}}(\mathcal{G}^{0}) = \{ e\}$, where $\mathcal{G}^{0} \subseteq \mathcal{G}$ is the connected component of identity in the Zariski topology. That is to say, there are no non-trivial $\mathbb{Q}$-characters of $\mathcal{G}^{0}$. -->
 
 								</div>
 								<div class="fragment fade-in" style="text-align: center">
@@ -997,41 +1001,44 @@
 									<img src="images/weil.png" alt="Weil" height= "300" >
 								</div>
 									<p class="fragment fade-in-then-semi-out">
-									His formula is an an "adelic" setting, but let us try to interpret it for our use.
+									His formula is an an "adelic" setting, but it can be used to derive integration all the integration formulas that have been used so far!
+									</p>
+									<p class="fragment fade-in-then-semi-out">
+									In particular, one can also derive the higher-moment formulas due to Rogers.
 									</p>
 							</section>
-							<section>
-								<ul class="fragment fade-in-then-semi-out">
-									<li> Let $\pi :\mathcal{G} \rightarrow GL(V)$ be a $\mathbb{Q}$-representation of a semisimple $\mathbb{Q}$-algebraic group. 
-										<li> Let $\Lambda \subseteq V_\mathbb{Q}$ be a maximal-rank base lattice on which the group will act to randomize it.
-											<li> Let $\Gamma \subseteq \mathcal{G}(\mathbb{Q}) = \{  g \in \mathcal{G}(\mathbb{Q}) \ | \ g \Lambda = \Lambda\}$
-												<li> Let $f:V_\mathbb{R} \to \mathbb{R}$ be a test function.
-								</ul>
-								<p class="fragment fade-in-then-semi-out">
+							<!-- <section> -->
+							<!-- 	<ul class="fragment fade-in-then-semi-out"> -->
+							<!-- 		<li> Let $\pi :\mathcal{G} \rightarrow GL(V)$ be a $\mathbb{Q}$-representation of a semisimple $\mathbb{Q}$-algebraic group. --> 
+							<!-- 			<li> Let $\Lambda \subseteq V_\mathbb{Q}$ be a maximal-rank base lattice on which the group will act to randomize it. -->
+							<!-- 				<li> Let $\Gamma \subseteq \mathcal{G}(\mathbb{Q}) = \{  g \in \mathcal{G}(\mathbb{Q}) \ | \ g \Lambda = \Lambda\}$ -->
+							<!-- 					<li> Let $f:V_\mathbb{R} \to \mathbb{R}$ be a test function. -->
+							<!-- 	</ul> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
 
-								Then assuming that the left side below converges absolutely, Weil's formula is 
-								\[
-								\DeclareMathOperator{\vol}{vol}
-								\int_{\mathcal{G}(\mathbb{R})/\Gamma} \left( \sum_{v \in g\Lambda} f(v) \right) dg 
-								=  
-								\sum_{ \Gamma w \in \Gamma \backslash \Lambda } 
-								\vol\left( \mathcal{G}_w(\mathbb{R})/\Gamma_w  \right)
-								\int_{ g \in \mathcal{G}(\mathbb{R}) / \mathcal{G}_{w}(\mathbb{R})} f(gx)dg,
-								\]
-								where 
-								\begin{align}
-								\mathcal{G}_w(\mathbb{Q})  & = \{ g \in \mathcal{G}(\mathbb{Q}) \ | \ gw = w\}, \\
-								\Gamma & = \{ g \in \Gamma \ | \ gw = w\},
-								\end{align}
+							<!-- 	Then assuming that the left side below converges absolutely, Weil's formula is --> 
+							<!-- 	\[ -->
+							<!-- 	\DeclareMathOperator{\vol}{vol} -->
+							<!-- 	\int_{\mathcal{G}(\mathbb{R})/\Gamma} \left( \sum_{v \in g\Lambda} f(v) \right) dg --> 
+							<!-- 	= -->  
+							<!-- 	\sum_{ \Gamma w \in \Gamma \backslash \Lambda } --> 
+							<!-- 	\vol\left( \mathcal{G}_w(\mathbb{R})/\Gamma_w  \right) -->
+							<!-- 	\int_{ g \in \mathcal{G}(\mathbb{R}) / \mathcal{G}_{w}(\mathbb{R})} f(gx)dg, -->
+							<!-- 	\] -->
+							<!-- 	where --> 
+							<!-- 	\begin{align} -->
+							<!-- 	\mathcal{G}_w(\mathbb{Q})  & = \{ g \in \mathcal{G}(\mathbb{Q}) \ | \ gw = w\}, \\ -->
+							<!-- 	\Gamma & = \{ g \in \Gamma \ | \ gw = w\}, -->
+							<!-- 	\end{align} -->
 
-								</p>
-								<p class="fragment fade-in-then-semi-out">
-								Weil also gives some sufficient conditions for when the left-hand side will exist. However, at this level of abstraction this is a bit difficult to handle.
-								</p>
-								<p class="fragment fade-in-then-semi-out">
-								But observe that in the innermost term, we are just integrating $f$ along an orbit $\mathcal{G}(\mathbb{R}) w$ and then summing up over lattice orbits. This is all we need to start computing!
-								</p>
-							</section>
+							<!-- 	</p> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	Weil also gives some sufficient conditions for when the left-hand side will exist. However, at this level of abstraction this is a bit difficult to handle. -->
+							<!-- 	</p> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	But observe that in the innermost term, we are just integrating $f$ along an orbit $\mathcal{G}(\mathbb{R}) w$ and then summing up over lattice orbits. This is all we need to start computing! -->
+							<!-- 	</p> -->
+							<!-- </section> -->
 						</section>
 
 						<section style="text-align: left;">
@@ -1041,67 +1048,67 @@
 
 
 
+							<!-- <section> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	Let us work with one very concrete example in this framework. Suppose we want to computer higher moments of our Siegel transforms in the most classical case. That is, we want to evaluate for some $n \ge 2$ -->
+							<!-- 	\begin{equation} -->
+							<!-- 	\int_{SL_d(\mathbb{R})/SL_d(\mathbb{Z})} \left( \sum_{v \in g \mathbb{Z}^{d} } f(v) \right)^{n} dg = --> 
+							<!-- 	\int_{SL_d(\mathbb{R})/SL_d(\mathbb{Z})} \left( \sum_{ (v_1,v_2,\dots,v_n) \in (g \mathbb{Z}^{d})^{n} } f(v_1) f(v_2) \dots f(v_n) \right) dg -->
+							<!-- 	\end{equation} -->
+							<!-- 	</p> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	For this, we can use Weil's setup as follows: --> 
+							<!-- 	</p> -->
+							<!-- 	<ul class="fragment fade-in-then-semi-out"> -->
+							<!-- 		<li> $ \pi : SL_d \rightarrow GL_{d \times n }$ is the diagonal action on $(\mathbb{Q}^{d})^{\oplus n}$, <br> -->
+							<!-- 			<li> $(\mathbb{Z}^{d} )^{n } \subseteq \mathbb{R}^{d \times n } $ is the base lattice, <br> -->
+							<!-- 				<li> $SL_d(\mathbb{Z})$ stabilizes $\mathbb{Z}^{d \times n }$ under the left action (or equiv. diagonal action on $(\mathbb{Z}^d)^{\oplus n}$), -->
+							<!-- 					<li> Test function is $g : \mathbb{R}^{d \times n } \rightarrow \mathbb{R}$ as $g = f^{\otimes n }$. -->
+							<!-- 	</ul> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	Then, we get --> 
+							<!-- 	\begin{equation} -->
+							<!-- 	\int_{SL_d(\mathbb{R})/SL_d(\mathbb{Z})} \left( \sum_{v \in g \mathbb{Z}^{d} } f(v) \right)^{n} dg = \sum_{ \text{orbit}~w\in SL_d(\mathbb{Z}) \backslash \mathbb{Z}^{d \times n }}  \cdots -->
+
+							<!-- 	\end{equation} -->
+							<!-- 	</p> -->
+
+							<!-- </section> -->
+							<!-- <section> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	But then what are the orbits of $SL_d(\mathbb{Z})$ action on $\mathbb{Z}^{d \times n}$? Let us work this out for $n < d$. -->
+							<!-- 	</p> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	Let $\alpha_1, \alpha_2 ,\dots, \alpha_n \in \mathbb{Q}^{n}$. Then for $v_1, v_2 ,\dots,v_n \in \mathbb{Z}^{d}$ and $g \in SL_d(\mathbb{Z})$, we have --> 
+							<!-- 	\begin{align} -->
+							<!-- 	\alpha_1 v_1 + \alpha_2 v_2 + \dots + \alpha_n v_n  = 0 -->  
+							<!-- 	\Rightarrow  \alpha_1 g v_1 + \alpha_2 g v_2 + \dots \alpha_n g v_n = 0. -->
+							<!-- 	\end{align} -->
+							<!-- 	</p> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	If $v_1,\dots,v_n$ span an $m$-dimensional space, they will have $n-m$ linear dependencies. -->
+							<!-- 	These linear dependence coeffiencients $(\alpha_1, \alpha_2,\dots, \alpha_n) $ span an $(n-m)$-dimensional space in $\mathbb{Q}^{n}$. -->
+							<!-- 	</p> -->
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	This almost determines all the orbits. -->
+							<!-- 	For $n < d$, the orbits of $SL_d(\mathbb{Z})$ action on $(\mathbb{Z}^{d} \setminus \{0\})^{n}$ -->
+
+							<!-- 	   are in bijection with subpaces of $\mathbb{Q}^{n}$. -->
+							<!-- 	</p> -->
+
+
+							<!-- 	<p class="fragment fade-in-then-semi-out"> -->
+							<!-- 	We are now ready to state a higher moment formula due to Rogers (1966). -->
+							<!-- 	</p> -->
+							<!-- 	<div class="fragment fade-in" style="text-align: center"> -->
+							<!-- 		<img src="images/rogers.jpg" alt="Rogers" height= "200" > -->
+							<!-- 	</div> -->
+
+							<!-- </section> -->
 							<section>
-								<p class="fragment fade-in-then-semi-out">
-								Let us work with one very concrete example in this framework. Suppose we want to computer higher moments of our Siegel transforms in the most classical case. That is, we want to evaluate for some $n \ge 2$
-								\begin{equation}
-								\int_{SL_d(\mathbb{R})/SL_d(\mathbb{Z})} \left( \sum_{v \in g \mathbb{Z}^{d} } f(v) \right)^{n} dg = 
-								\int_{SL_d(\mathbb{R})/SL_d(\mathbb{Z})} \left( \sum_{ (v_1,v_2,\dots,v_n) \in (g \mathbb{Z}^{d})^{n} } f(v_1) f(v_2) \dots f(v_n) \right) dg
-								\end{equation}
-								</p>
-								<p class="fragment fade-in-then-semi-out">
-								For this, we can use Weil's setup as follows: 
-								</p>
-								<ul class="fragment fade-in-then-semi-out">
-									<li> $ \pi : SL_d \rightarrow GL_{d \times n }$ is the diagonal action on $(\mathbb{Q}^{d})^{\oplus n}$, <br>
-										<li> $(\mathbb{Z}^{d} )^{n } \subseteq \mathbb{R}^{d \times n } $ is the base lattice, <br>
-											<li> $SL_d(\mathbb{Z})$ stabilizes $\mathbb{Z}^{d \times n }$ under the left action (or equiv. diagonal action on $(\mathbb{Z}^d)^{\oplus n}$),
-												<li> Test function is $g : \mathbb{R}^{d \times n } \rightarrow \mathbb{R}$ as $g = f^{\otimes n }$.
-								</ul>
-								<p class="fragment fade-in-then-semi-out">
-								Then, we get 
-								\begin{equation}
-								\int_{SL_d(\mathbb{R})/SL_d(\mathbb{Z})} \left( \sum_{v \in g \mathbb{Z}^{d} } f(v) \right)^{n} dg = \sum_{ \text{orbit}~w\in SL_d(\mathbb{Z}) \backslash \mathbb{Z}^{d \times n }}  \cdots
-
-								\end{equation}
-								</p>
-
-							</section>
-							<section>
-								<p class="fragment fade-in-then-semi-out">
-								But then what are the orbits of $SL_d(\mathbb{Z})$ action on $\mathbb{Z}^{d \times n}$? Let us work this out for $n < d$.
-								</p>
-								<p class="fragment fade-in-then-semi-out">
-								Let $\alpha_1, \alpha_2 ,\dots, \alpha_n \in \mathbb{Q}^{n}$. Then for $v_1, v_2 ,\dots,v_n \in \mathbb{Z}^{d}$ and $g \in SL_d(\mathbb{Z})$, we have 
-								\begin{align}
-								\alpha_1 v_1 + \alpha_2 v_2 + \dots + \alpha_n v_n  = 0  
-								\Rightarrow  \alpha_1 g v_1 + \alpha_2 g v_2 + \dots \alpha_n g v_n = 0.
-								\end{align}
-								</p>
-								<p class="fragment fade-in-then-semi-out">
-								If $v_1,\dots,v_n$ span an $m$-dimensional space, they will have $n-m$ linear dependencies.
-								These linear dependence coeffiencients $(\alpha_1, \alpha_2,\dots, \alpha_n) $ span an $(n-m)$-dimensional space in $\mathbb{Q}^{n}$.
-								</p>
-								<p class="fragment fade-in-then-semi-out">
-								This almost determines all the orbits.
-								For $n < d$, the orbits of $SL_d(\mathbb{Z})$ action on $(\mathbb{Z}^{d} \setminus \{0\})^{n}$
-
-								   are in bijection with subpaces of $\mathbb{Q}^{n}$.
-								</p>
-
 
 								<p class="fragment fade-in-then-semi-out">
-								We are now ready to state a higher moment formula due to Rogers (1966).
-								</p>
-								<div class="fragment fade-in" style="text-align: center">
-									<img src="images/rogers.jpg" alt="Rogers" height= "200" >
-								</div>
-
-							</section>
-							<section>
-
-								<p class="fragment fade-in-then-semi-out">
-								For any $\mathbb{Q}$-subspace $ S \subseteq \mathbb{Q}^{n}$, we can define a height $H(S) $ as
+								\(\DeclareMathOperator{\vol}{vol}\)For any $\mathbb{Q}$-subspace $ S \subseteq \mathbb{Q}^{n}$, we can define a height $H(S) $ as
 								\begin{equation}
 								H(S) = \vol\left(   \frac{S \otimes_\mathbb{Q} \mathbb{R}}{ S \cap \mathbb{Z}^{n}} \right),
 								\end{equation}
@@ -1209,8 +1216,11 @@
 								</p>
 
 								<p class="fragment fade-in-then-semi-out">
-								Each $\mathcal{O}_K$ lattice $\Lambda \subseteq K_\mathbb{R}^t$ lives in a real space of dimension $t \times [K:\mathbb{Q}]$. We equip $K_\mathbb{R}^t$ with the "normalized trace form" so that each $\Lambda$ has unit covolume.
-
+								Each $\mathcal{O}_K$ lattice $\Lambda \subseteq K_\mathbb{R}^t$ lives in a real space of dimension $t \times [K:\mathbb{Q}]$. We equip $K_\mathbb{R}^t$ with the "normalized trace form" so that each $\Lambda$ has unit covolume. On $K_{\mathbb{R}}$ it is
+\begin{equation}
+\langle x,y \rangle = \Delta_K^{-\frac{2}{[K:\mathbb{Q}]}} \text{Tr}(x\overline{y}).
+\end{equation}
+On $K_{\mathbb{R}}^t$, it is extended by just summing up "coordinate-wise".
 								</p>
 
 								<p class="fragment fade-in-then-semi-out">
@@ -1296,7 +1306,7 @@
 								</div>
 
 								<p class="fragment fade-in-then-semi-out">
-								What follows is then a lot of calculations!
+								What follows is many pages of calculations!
 								</p>
 
 								<p class="fragment fade-in-then-semi-out">
@@ -1340,7 +1350,63 @@
 									<div class="fig-container no-margin-top"  data-file="LatticeAnimation/convex_combination_lemma.html"></div>
 								</div>
 							</section>
+
+							<section>
+								
+								<p class="fragment fade-in-then-semi-out">
+								\(\DeclareMathOperator{\OK}{\mathcal{O}_K}\)Here are some of the calculations for the second moment. Let $f = \mathbb{I}_B$ be the indicator function of an origin-centered ball $B$.
+
+							The integration formula first gives that our expected value is
+$$\vol(B)^2+\sum_{\alpha\in K^\times}[\OK:\alpha^{-1}\OK \cap\OK]^{-t}\cdot\vol(B\cap\alpha B).$$
+								</p>
+
+								<p class="fragment fade-in-then-semi-out">
+To arrive at our result it suffices to prove exponential decay of the sum
+\begin{equation}
+    \sum_{\alpha\in (K^\times\setminus\mu_K)/\mu_K}[\OK:\alpha^{-1} \OK \cap\OK]^{-t}\cdot\frac{\vol(B\cap\alpha B)}{\vol(B)},
+\end{equation}
+								</p>
+
+								<p class="fragment fade-in-then-semi-out">
+The main terms are then contributed by $\alpha \in \langle \mu_n \rangle$.
+								</p>
+								
+								
+								<p class="fragment fade-in-then-semi-out">
+								For the error terms, we write 
+								$S_\beta=\sum_{\alpha\in (\OK^\times\setminus\mu_K)/\mu_K}\frac{\vol(B\cap\alpha\beta B)}{\vol(B)}$
+								and evaluate
+								$$\sum_{\beta \in (K^{\times}\setminus \OK^{\times})/\OK^{\times}} [\OK:\beta^{-1} \OK \cap\OK]^{-t} S_{\beta}.$$
+								</p>
+							</section>
+
+							<section>
+								
+								<p class="fragment fade-in-then-semi-out">
+								We then approximate
+								$$\frac{\vol(B\cap\alpha\beta B)}{\vol(B)} \leq \frac{1}{\cosh(  2 \cdot h(\alpha \beta))^{t[K:\mathbb{Q}]/2 }}$$
+								using the convex combinations idea. Here the Bogomolov property helps to prove exponential decay.
+								</p>
+								
+								<p class="fragment fade-in-then-semi-out">
+								And then it remains to put a strict inequality to bound the point counts
+								$$\# \{ \alpha \in \OK^{\times} \mid h(\alpha \beta ) \leq T\}$$ in terms of $\beta,T$. This is done using a packing argument in the log embedding of units.
+								</p>
+								
+								<p class="fragment fade-in-then-semi-out">
+								Then, combine the point counts with exponential decay to get
+								$$ S_{\beta} \ll N(\beta)^{-t \varepsilon_1} \cdot \exp( \varepsilon_2 (t[K:\mathbb{Q}])$$
+								</p>
+								
+								<p class="fragment fade-in-then-semi-out">
+								Keeping track of the constants, we can bound the sum of $S_{\beta}$ over $\beta$ with a special value of Dedekind zeta function.
+								</p>
+
+
+							</section>
+
 						</section>
+
 
 
 
